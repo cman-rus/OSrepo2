@@ -1,0 +1,81 @@
+Begin testing...
+
+-------------------------------------------
+Size: 8
+	Size T: 2
+	T:        0.04 real         0.04 user         0.00 sys
+	R:        0.07 real         0.06 user         0.00 sys
+
+	Size T: 3
+	T:        0.05 real         0.05 user         0.00 sys
+	R:        0.07 real         0.06 user         0.00 sys
+
+	Size T: 4
+	T:        0.06 real         0.05 user         0.00 sys
+	R:        0.07 real         0.06 user         0.00 sys
+
+	Size T: 5
+	T:        0.06 real         0.06 user         0.00 sys
+	R:        0.07 real         0.06 user         0.00 sys
+
+	Size T: 6
+	T:        0.07 real         0.06 user         0.00 sys
+	R:        0.07 real         0.06 user         0.00 sys
+
+-------------------------------------------
+Size: 9
+	Size T: 2
+	T:        0.50 real         0.49 user         0.00 sys
+	R:        0.85 real         0.82 user         0.02 sys
+
+	Size T: 3
+	T:        0.60 real         0.58 user         0.02 sys
+	R:        0.85 real         0.83 user         0.02 sys
+
+	Size T: 4
+	T:        0.68 real         0.67 user         0.01 sys
+	R:        0.85 real         0.82 user         0.02 sys
+
+	Size T: 5
+	T:        0.78 real         0.75 user         0.01 sys
+	R:        0.84 real         0.82 user         0.01 sys
+
+	Size T: 6
+	T:        0.81 real         0.77 user         0.02 sys
+	R:        0.85 real         0.82 user         0.02 sys
+
+-------------------------------------------
+Size: 10
+	Size T: 2
+	T:        8.11 real         7.83 user         0.11 sys
+	R:       33.41 real        30.20 user         0.76 sys
+
+	Size T: 3
+	T:       10.36 real         9.19 user         0.24 sys
+	R:       35.66 real        31.54 user         0.77 sys
+
+	Size T: 4
+	T:       12.26 real        11.79 user         0.28 sys
+	R:       34.55 real        31.18 user         0.82 sys
+
+	Size T: 5
+	T:       13.31 real        12.31 user         0.27 sys
+	R:       29.74 real        28.32 user         0.61 sys
+
+	Size T: 6
+	T:       12.91 real        12.56 user         0.26 sys
+	R:       28.48 real        27.63 user         0.67 sys
+
+-------------------------------------------
+Size: 11
+	Size T: 2
+	T:       65.75 real        63.83 user         1.62 sys
+	R:      273.67 real       264.90 user         6.52 sys
+
+	Size T: 3
+	T:       76.27 real        74.16 user         1.66 sys
+	R:      275.27 real       264.06 user         6.22 sys
+
+	Size T: 4
+	T:       97.62 real        93.50 user         1.90 sys
+	R:      280.34 real       267.45 user         6.51 sys
