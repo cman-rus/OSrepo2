@@ -8,6 +8,7 @@ start:
 	pop	es
 	push	cs
 	pop	ds
+	sti
 	
 	mov	ah, 2
 	mov	al, 0x1
@@ -18,6 +19,7 @@ start:
 	
 	jc      @err
 
+	cli
 	lgdt	[limit]
 	
 	mov	eax, cr0
