@@ -1,4 +1,5 @@
 	bits	16
+extern print
 section	.go32	
 
 	cli
@@ -23,7 +24,7 @@ sta2:
    	mov	ss, ax
 
 	sti
-	call	0x9000
+	call	print
 
 	cli
 	hlt
@@ -33,10 +34,10 @@ t1:
 	dd 	0x0
 	dd	0x0
 	dd	0x0000ffff
-	dd	0x004f9a00
+	dd	0x00cf9a00
 
 	dd	0x0000ffff
-	dd	0x004f9200
+	dd	0x00cf9200
 	
 limit	dw	24
 base	dd	t1
