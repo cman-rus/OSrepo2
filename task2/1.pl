@@ -40,23 +40,29 @@ for(@a)
 	binmode F;
 
 	$d = $l - 512;
+	$/=\$d;
 
 	while($d>0)
 	{
-		$d--;
 		$_=<F>;
+		$d = $d - length($_);
+		$/=\$d;
 	}
 
 	open W, ">bin123".$l or die "can't open write file: $!";
 	binmode W;
 	$\="";
 	$d=512;
+	$/=\$d;
+	$o = "";
 	while($d>0)
 	{
-		$d--;
 		$_=<F>;
-		(print W $_) or die "can't write file: $!";;
+		$d = $d - length($_);
+		$/=\$d;
+		$o .= $_;
 	}
+	(print W $o) or die "can't write file: $!";
 	close W or die "can't close file: $!";;
 	close F or die "can't close file: $!";;
 }
