@@ -12,9 +12,9 @@ for(8..11)
 
 	`make`;
 	print "\tR:";
-  #      print `time ./main 2`;
+        print `time ./main`;
 	print "\n";
-	for(1..1)
+	for(1..7)
 	{
 		$st = $_;
 		open F, ">main.h";
@@ -24,7 +24,9 @@ for(8..11)
 		`make`;
 		
 		print "\tT=$st:";
-		print `time ./main`;
+		print `time ./main 2`;
+                print "\tTmy=$st:";
+                print `time ./main 2 2`;
 		print "\n";
 	}
 }

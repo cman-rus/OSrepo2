@@ -1,9 +1,10 @@
 #include<stdio.h>
 #include "main.h"
 
-volatile int a[1<<size][1<<size];
-volatile int b[1<<size][1<<size];
-volatile int c[1<<size][1<<size];
+
+volatile int a[(1<<size) * (1<<size)];
+volatile int b[(1<<size) * (1<<size)];
+volatile int c[(1<<size) * (1<<size)];
 
 int R()
 {
@@ -13,7 +14,7 @@ int R()
 		{
 			for (int i = 0; i < 1<<size; ++i)
 			{
-				c[x][y] += a[x][i] * b[i][y];
+				c[x*(1<<size) + y] += a[x*(1<<size) + i] * b[i*(1<<size) + y];
 			}
 		}
 	}
@@ -22,8 +23,12 @@ int R()
 
 }
 
-int T()
+int Tmy()
 {
+
+	int tileSize = (1<<sT) * (1<<sT);
+
+        int tmp = (1<<sT) * (1<<size);
 
 	// алгоритм, не смотря на замечания, правильный. поясню его
 	
@@ -31,32 +36,31 @@ int T()
 	// формула для общего случая, если стороны не кратные. в нашем случае - всегда cou = (1<<size)/(1<<sT). Я не рассматриваю общий случай - темболее сам алгоритм построен для того, чтоб все кратно было. просто захотелось такую формулу =)
 	// для 1x1 получается 1<<size - что правильно
 	// каой смысл от cou? мы разбиваем нашу матрицу c[1<<size][1<<size] на квадратики со сторонами 1<<sT. и первые два вложенных цикла бегут по этим квадратам
-	int cou = ((1<<size) - 1)/(1<<sT)+1;
+	int cou = ((1<<size)-1)/(1<<sT) + 1;
 	
 	for (int x = 0; x < cou; ++x)
         {
                 for (int y = 0; y < cou; ++y)
                 {
-			// вот мы выбрали один из квадратов размерами с T. теперь мы разбиваем на отрезки прямую 0..1<<size-1.
-			for(int i1=0; i1<cou; ++i1)
+			// следующие 2 вложенных цикла пробегают по всем элементам квадратика размерами T из матрицы c[1<<size][1<<size]
+			for(int i=0; i< 1<<sT; ++i)
 			{
-				// следующие 2 вложенных цикла пробегают по всем элементам квадратика размерами T из матрицы c[1<<size][1<<size]
-				for(int i=0; i< 1<<sT; ++i)
-				{
-					for(int j=0; j< 1<<sT; ++j)
-                        		{
-						int x1 = x * (1<<sT) + i;
-						int y1 = y * (1<<sT) + j;
+				for(int j=0; j< 1<<sT; ++j)
+                       		{
+					int x1 = x * (1<<sT) + i;
+					int y1 = y * (1<<sT) + j;
 						
-						// А вот теперь для каждого элемента мы прибавляем значения из отрезка на который мы били прямую
-						// (ну чтоб не менять страницы, а использовать их для всех элементов из квадратика Т нашей матрицы c[1<<size][1<<size])
-						for (int i2 = 0; i2 < 1<<sT; ++i2)
-                        			{
-							// i1*i2 = cou * 1<<sT = ( (1<<size)/(1<<sT) )* 1<<sT = (1<<size)
-                                			c[x1][y1] += a[x1][i1*(1<<sT)+i2] * b[i1*(1<<sT)+i2][y1];
-                       				}
-                        		} 
-				}
+					int posi = (x1 / (1<<sT)) * tmp + (1<<sT) * (x1 % (1<<sT));
+					int posj = (y1 / (1<<sT)) * tileSize + y1 % (1<<sT);
+					int pos = posi + posj;
+					
+					for (int k = 0; k < 1<<size; ++k)
+                        		{
+                		                c[pos] += a[posi + (k / (1<<sT)) * tileSize + k % (1<<sT)] * b[(k / (1<<sT)) * tmp + (1<<sT) * (k % (1<<sT)) + posj];
+		                        }
+
+
+                        	} 
 			}
                 }
         }
@@ -68,15 +72,49 @@ int T()
 	return 0;
 }
 
+int T()
+{
+	int tileSize = (1<<sT) * (1<<sT);
+
+	int tmp = (1<<sT) * (1<<size);
+	
+        for (int i = 0; i < 1<<size; ++i)
+        {
+		int posi = (i / (1<<sT)) * tmp + (1<<sT) * (i % (1<<sT));
+                for (int j = 0; j < 1<<size; ++j)
+                {
+			int posj = (j / (1<<sT)) * tileSize + j % (1<<sT);
+			int pos = posi + posj;
+
+                        for (int k = 0; k < 1<<size; ++k)
+                        {
+				c[pos] += a[posi + (k / (1<<sT)) * tileSize + k % (1<<sT)] * b[(k / (1<<sT)) * tmp + (1<<sT) * (k % (1<<sT)) + posj];
+                        }
+                }
+        }
+
+	return 0;
+}
+
 int main(int argc, char *argv[])
 {
-	if(argc == 2)
+	if(argc == 1)
 	{
+//		printf("R\n");
 		R();
 	}
 	else
 	{
-		T();
+		if(argc == 2)
+		{
+//			printf("T\n");
+			T();
+		}
+		else
+		{
+//                        printf("Tmy\n");
+                        Tmy();
+		}
 	}
 	return 0;
 }
