@@ -1,4 +1,4 @@
-SOURCES=f.o main.o monitor.o common.o descriptor_tables.o isr.o interrupt.o gdt.o go32.o
+SOURCES=go32.o f.o main.o monitor.o common.o descriptor_tables.o isr.o interrupt.o gdt.o
 
 CFLAGS=-c -nostdlib -nostdinc -fno-builtin -fno-stack-protector -m32 -march=i386 
 LDFLAGS=--oformat elf32-i386 -m elf_i386 -Tlink.ld

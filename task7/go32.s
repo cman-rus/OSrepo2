@@ -1,6 +1,7 @@
 	bits	16
 extern print
-section	.go32	
+	
+section .text
 
 	cli
 

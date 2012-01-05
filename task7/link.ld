@@ -1,32 +1,5 @@
 SECTIONS
 {
-    .go32 0x8200 :
-    {
-        code = .; _code = .; __code = .;
-        *(.go32)
-        . = ALIGN(4096);
-    }
-    .text 0x9000 :
-    {
-        code = .; _code = .; __code = .;
-        *(.text)
-        . = ALIGN(4096);
-    }
+    .text 0x8200: { *(.text) . = ALIGN(8192); }
 
-    .data :
-    {
-        data = .; _data = .; __data = .;
-        *(.data)
-        *(.rodata)
-        . = ALIGN(4096);
-    }
-
-    .bss :
-    {
-        bss = .; _bss = .; __bss = .;
-        *(.bss)
-        . = ALIGN(4096);
-    }
-
-    end = .; _end = .; __end = .;
 }
